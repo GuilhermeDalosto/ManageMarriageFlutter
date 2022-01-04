@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'CardSection_Alignment.dart';
 import 'CardSection_Draggable.dart';
 
-class SwipeFeedPage extends StatefulWidget {
+class GamePage extends StatefulWidget {
   @override
-  _SwipeFeedPageState createState() => _SwipeFeedPageState();
+  _GamePageState createState() => _GamePageState();
 }
 
-class _SwipeFeedPageState extends State<SwipeFeedPage> {
+class _GamePageState extends State<GamePage> {
   bool showAlignmentCards = false;
 
   @override
@@ -16,19 +16,7 @@ class _SwipeFeedPageState extends State<SwipeFeedPage> {
       appBar: AppBar(
         elevation: 0.0,
         centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: () {}, icon: Icon(Icons.settings, color: Colors.grey)),
-        title: Switch(
-          onChanged: (bool value) => setState(() => showAlignmentCards = value),
-          value: showAlignmentCards,
-          activeColor: Colors.red,
-        ),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.question_answer, color: Colors.grey)),
-        ],
+        backgroundColor: Colors.white,       
       ),
       backgroundColor: Colors.white,
       body: Column(

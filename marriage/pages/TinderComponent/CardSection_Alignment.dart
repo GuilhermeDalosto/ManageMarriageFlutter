@@ -28,10 +28,10 @@ class _CardsSectionState extends State<CardsSectionAlignment>
   int cardsCounter = 0;
 
   List<ProfileCardAlignment> cards = [];
-  AnimationController? _controller;
+  late AnimationController _controller;
 
   final Alignment defaultFrontCardAlign = Alignment(0.0, 0.0);
-  Alignment? frontCardAlign;
+  late Alignment frontCardAlign;
   double frontCardRot = 0.0;
 
   @override
@@ -48,8 +48,8 @@ class _CardsSectionState extends State<CardsSectionAlignment>
     // Init the animation controller
     _controller =
         AnimationController(duration: Duration(milliseconds: 700), vsync: this);
-    _controller!.addListener(() => setState(() {}));
-    _controller!.addStatusListener((AnimationStatus status) {
+    _controller.addListener(() => setState(() {}));
+    _controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) changeCardsOrder();
     });
   }
@@ -64,7 +64,7 @@ class _CardsSectionState extends State<CardsSectionAlignment>
         frontCard(),
 
         // Prevent swiping if the cards are animating
-        _controller!.status != AnimationStatus.forward
+        _controller.status != AnimationStatus.forward
             ? SizedBox.expand(
                 child: GestureDetector(
                 // While dragging the first card
@@ -73,22 +73,22 @@ class _CardsSectionState extends State<CardsSectionAlignment>
                   setState(() {
                     // 20 is the "speed" at which moves the card
                     frontCardAlign = Alignment(
-                        frontCardAlign!.x +
+                        frontCardAlign.x +
                             20 *
                                 details.delta.dx /
                                 MediaQuery.of(context).size.width,
-                        frontCardAlign!.y +
+                        frontCardAlign.y +
                             40 *
                                 details.delta.dy /
                                 MediaQuery.of(context).size.height);
 
-                    frontCardRot = frontCardAlign!.x; // * rotation speed;
+                    frontCardRot = frontCardAlign.x; // * rotation speed;
                   });
                 },
                 // When releasing the first card
                 onPanEnd: (_) {
                   // If the front card was swiped far enough to count as swiped
-                  if (frontCardAlign!.x > 3.0 || frontCardAlign!.x < -3.0) {
+                  if (frontCardAlign.x > 3.0 || frontCardAlign.x < -3.0) {
                     animateCards();
                   } else {
                     // Return to the initial rotation and alignment
@@ -106,12 +106,12 @@ class _CardsSectionState extends State<CardsSectionAlignment>
 
   Widget backCard() {
     return Align(
-      alignment: _controller!.status == AnimationStatus.forward
-          ? CardsAnimation.backCardAlignmentAnim(_controller!).value
+      alignment: _controller.status == AnimationStatus.forward
+          ? CardsAnimation.backCardAlignmentAnim(_controller).value
           : cardsAlign[0],
       child: SizedBox.fromSize(
-          size: _controller!.status == AnimationStatus.forward
-              ? CardsAnimation.backCardSizeAnim(_controller!).value
+          size: _controller.status == AnimationStatus.forward
+              ? CardsAnimation.backCardSizeAnim(_controller).value
               : cardsSize[2],
           child: cards[2]),
     );
@@ -119,12 +119,12 @@ class _CardsSectionState extends State<CardsSectionAlignment>
 
   Widget middleCard() {
     return Align(
-      alignment: _controller!.status == AnimationStatus.forward
-          ? CardsAnimation.middleCardAlignmentAnim(_controller!).value
+      alignment: _controller.status == AnimationStatus.forward
+          ? CardsAnimation.middleCardAlignmentAnim(_controller).value
           : cardsAlign[1],
       child: SizedBox.fromSize(
-          size: _controller!.status == AnimationStatus.forward
-              ? CardsAnimation.middleCardSizeAnim(_controller!).value
+          size: _controller.status == AnimationStatus.forward
+              ? CardsAnimation.middleCardSizeAnim(_controller).value
               : cardsSize[1],
           child: cards[1]),
     );
@@ -132,11 +132,11 @@ class _CardsSectionState extends State<CardsSectionAlignment>
 
   Widget frontCard() {
     return Align(
-        alignment: _controller!.status == AnimationStatus.forward
+        alignment: _controller.status == AnimationStatus.forward
             ? CardsAnimation.frontCardDisappearAlignmentAnim(
-                    _controller!, frontCardAlign!)
+                    _controller, frontCardAlign)
                 .value
-            : frontCardAlign!,
+            : frontCardAlign,
         child: Transform.rotate(
           angle: (pi / 180.0) * frontCardRot,
           child: SizedBox.fromSize(size: cardsSize[0], child: cards[0]),
@@ -160,9 +160,9 @@ class _CardsSectionState extends State<CardsSectionAlignment>
   }
 
   void animateCards() {
-    _controller!.stop();
-    _controller!.value = 0.0;
-    _controller!.forward();
+    _controller.stop();
+    _controller.value = 0.0;
+    _controller.forward();
   }
 }
 

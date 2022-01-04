@@ -10,8 +10,6 @@ class _InstaListState extends State<InstaList> {
 
   @override
   Widget build(BuildContext context) {
-    var deviceSize = MediaQuery.of(context).size;
-
     return ListView.builder(
       itemCount: 5,
       itemBuilder: (context, index) => Column(

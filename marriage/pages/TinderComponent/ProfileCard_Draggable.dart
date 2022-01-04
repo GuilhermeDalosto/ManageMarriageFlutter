@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ProfileCardDraggable extends StatelessWidget {
   final int cardNum;
   ProfileCardDraggable(this.cardNum);
+  final imageList = ['taqui.jpeg', 'fazenda.jpeg', 'casal.png'];
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +13,19 @@ class ProfileCardDraggable extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: Image.asset('portrait.jpeg', fit: BoxFit.cover),
+            child: Image.asset('res/${imageList[cardNum]}', fit: BoxFit.cover),            
           ),
           Container(
               padding: EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Card number $cardNum',
+                  Text('Taquicardia',
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.w700)),
                   Padding(padding: EdgeInsets.only(bottom: 8.0)),
-                  Text('A short description.', textAlign: TextAlign.start),
+                  Text('O ritmo cardíaco acelerado pode não ser causado por doenças subjacentes. Algumas causas comuns são exercícios, medo, ansiedade, estresse, raiva ou amor.',
+                      textAlign: TextAlign.start),
                 ],
               ))
         ],
